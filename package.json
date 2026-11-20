@@ -1,0 +1,9 @@
+{
+  "name": "absolute-darkgpt-6767",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render start-command bridge for the Python Flask application",
+  "scripts": {
+    "start": "python server/app.py"
+  }
+}
