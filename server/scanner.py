@@ -45,11 +45,16 @@ class WiFiScanner:
         self._sniffer.join()
         self.running = False
 
-    def stop(self):
-        self.running = False
-        if self._sniffer is not None:
-            try:
-                if self._sniffer.running:
-                    self._sniffer.stop(join=False)
-            except Exception:
-                pass
+def stop(self):
+    sniffer = getattr(self, "sniffer", None)
+
+    if sniffer is not None:
+        try:
+            sniffer.stop(join=False)
+
+            thread = getattr(sniffer, "thread", None)
+            if thread is not None and thread.is_alive():
+                thread.join(timeout=1)
+
+        except Exception as exc:
+            print(f"Scanner stop error: {exc}")
