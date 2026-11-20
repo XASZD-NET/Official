@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d18">
+  <title>ABSOLUTE DARKGPT 6767</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark">AD</div>
+      <div class="brand-copy">
+        <h1>ABSOLUTE DARKGPT <span>6767</span></h1>
+        <p>Passive Wi-Fi Access Point Monitor</p>
+      </div>
+      <div class="connection"><i id="connectionDot"></i><span id="connectionText">กำลังตรวจสอบเซิร์ฟเวอร์</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">NETWORK OBSERVABILITY</p>
+        <h2>Wi-Fi Scanner Dashboard</h2>
+        <p class="muted">ตรวจสอบ Access Point ที่ประกาศ Beacon ในเครือข่าย/พื้นที่ที่ได้รับอนุญาต</p>
+      </div>
+      <div class="hero-status"><span class="pulse" id="scanPulse"></span><span id="scanState">ยังไม่เริ่มสแกน</span></div>
+    </section>
+
+    <section class="control-panel panel">
+      <div class="control-copy"><strong>ควบคุมการสแกน</strong><small>การรับข้อมูลเป็นแบบ Passive และไม่ส่งแพ็กเก็ตไปยังอุปกรณ์เป้าหมาย</small></div>
+      <div class="controls">
+        <label class="radius-control">รัศมีประเมิน
+          <select id="radiusSelect">
+            <option value="50">50 เมตร</option>
+            <option value="100" selected>100 เมตร</option>
+            <option value="150">150 เมตร</option>
+          </select>
+        </label>
+        <button id="startBtn" class="btn primary">เริ่มสแกน</button>
+        <button id="stopBtn" class="btn secondary" disabled>หยุดสแกน</button>
+      </div>
+      <p id="message" class="message" role="status">กำลังรอการเชื่อมต่อ</p>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat panel"><span class="stat-label">ACCESS POINTS</span><strong id="apCount">0</strong><small>เครือข่ายที่ตรวจพบ</small></article>
+      <article class="stat panel"><span class="stat-label">WITHIN ESTIMATED RADIUS</span><strong id="withinCount">0</strong><small>ผลประเมินจาก RSSI เท่านั้น</small></article>
+      <article class="stat panel"><span class="stat-label">SCAN RADIUS</span><strong><span id="radiusValue">100</span><em>m</em></strong><small>ระยะเป้าหมายที่เลือก</small></article>
+      <article class="stat panel"><span class="stat-label">SCAN STATUS</span><strong id="statusValue" class="status-value">OFF</strong><small id="lastUpdated">ยังไม่มีข้อมูล</small></article>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="section-heading"><div><p class="eyebrow">LIVE INVENTORY</p><h3>Access Point ที่ตรวจพบ</h3></div><span class="count-chip" id="tableCount">0 รายการ</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ชื่อเครือข่าย (SSID)</th><th>BSSID</th><th>RSSI</th><th>ระยะโดยประมาณ</th><th>พบล่าสุด</th></tr></thead>
+          <tbody id="deviceRows"><tr><td colspan="5" class="empty">ยังไม่มีข้อมูล กด “เริ่มสแกน” หลังเตรียม Monitor Interface แล้ว</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <p>Privacy mode: บันทึกเฉพาะข้อมูล Access Point จาก Beacon frame ไม่เก็บ Probe Request หรือ MAC ของอุปกรณ์ Client</p>
+      <p>หมายเหตุ: RSSI ไม่ใช่เครื่องวัดระยะทาง การจัดกลุ่มภายในรัศมีเป็นเพียงค่าประเมินและอาจคลาดเคลื่อนมาก</p>
+    </footer>
+  </main>
+  <script src="/script.js" defer></script>
+</body>
+</html>
