@@ -3,184 +3,286 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>เปิดลิงก์และรหัสผ่าน</title>
+  <title>เปิดลิงก์และคัดลอกรหัสผ่าน</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    }
-
     body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #0f1115;
-      color: #f3f4f6;
-      padding: 20px;
+      font-family: "Noto Sans Thai", "Inter", sans-serif;
     }
 
-    .card {
-      width: 100%;
-      max-width: 420px;
-      background: #181b22;
-      border: 1px solid #2a2f3a;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
-    .title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .desc {
-      font-size: 0.9rem;
-      color: #9ca3af;
-      margin-bottom: 20px;
-    }
-
-    .box {
-      background: #111318;
-      border: 1px solid #262b36;
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
-    }
-
-    .label {
-      font-size: 0.78rem;
-      color: #9ca3af;
-      margin-bottom: 6px;
-    }
-
-    .value-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .code-text {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #e5e7eb;
-      word-break: break-all;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 8px;
-      padding: 9px 14px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.12s ease, opacity 0.15s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .btn-copy {
-      background: #2563eb;
-      color: #ffffff;
-      flex-shrink: 0;
-    }
-
-    .btn-copy:hover {
-      background: #1d4ed8;
-    }
-
-    .btn-open {
-      width: 100%;
-      background: #16a34a;
-      color: #ffffff;
-      padding: 12px;
-      font-size: 0.95rem;
-      margin-top: 6px;
-    }
-
-    .btn-open:hover {
-      background: #15803d;
-    }
-
-    .status {
-      margin-top: 12px;
-      font-size: 0.84rem;
-      min-height: 20px;
-      color: #4ade80;
+    .animate-pop-in {
+      animation: popIn 0.25s ease-out forwards;
     }
   </style>
 </head>
-<body>
-  <main class="card">
-    <h1 class="title">เปิดลิงก์และรหัสผ่าน</h1>
-    <p class="desc">คัดลอกรหัสผ่านด้านล่าง แล้วเปิดลิงก์เพื่อใช้งาน</p>
-
-    <div class="box">
-      <div class="label">รหัสผ่าน</div>
-      <div class="value-row">
-        <span id="passwordText" class="code-text">KILLCRITIC</span>
-        <button id="copyBtn" type="button" class="btn btn-copy">คัดลอก</button>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-4 sm:p-6 selection:bg-indigo-500 selection:text-white">
+  <!-- Main responsive card container -->
+  <main class="w-full max-w-lg rounded-2xl bg-slate-900/95 border border-slate-800 shadow-2xl shadow-black/50 p-5 sm:p-8 animate-pop-in">
+    <!-- Header section -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-11 h-11 rounded-xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center shrink-0">
+        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5m4.242-4.242a4 4 0 015.656 0l3 3a4 4 0 01-5.656 5.656l-1.5-1.5" />
+        </svg>
+      </div>
+      <div>
+        <span class="inline-block text-xs font-semibold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-0.5 rounded-full mb-1">
+          พร้อมใช้งานทันที
+        </span>
+        <h1 class="text-xl sm:text-2xl font-bold text-white leading-snug">
+          ขั้นตอนการเปิดลิงก์และรหัสผ่าน
+        </h1>
       </div>
     </div>
 
-    <div class="box">
-      <div class="label">ลิงก์ปลายทาง</div>
-      <div class="value-row">
-        <span id="linkText" class="code-text">https://thinfi.com/0m9em</span>
-      </div>
-    </div>
+    <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+      กรุณาคัดลอกรหัสผ่านด้านล่างให้ถูกต้อง จากนั้นกดปุ่มเปิดลิงก์เพื่อไปยังหน้าปลายทาง
+    </p>
 
-    <a
-      id="openLinkBtn"
-      class="btn btn-open"
-      href="https://thinfi.com/0m9em"
-      target="_blank"
-      rel="noopener noreferrer"
+    <!-- Step-by-step instructions -->
+    <ol class="space-y-2.5 mb-6 text-sm text-slate-300 bg-slate-950/70 border border-slate-800/90 rounded-xl p-4">
+      <li class="flex items-start gap-2.5">
+        <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+        <span>กดปุ่ม <strong class="text-white font-semibold">คัดลอกรหัสผ่าน</strong> เพื่อเก็บ <code class="px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 font-mono">KILLCRITIC</code> ลงคลิปบอร์ด</span>
+      </li>
+      <li class="flex items-start gap-2.5">
+        <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+        <span>กดปุ่ม <strong class="text-white font-semibold">เปิดลิงก์</strong> เพื่อเปิดเว็บไซต์ <code class="px-1.5 py-0.5 rounded bg-slate-800 text-emerald-300 font-mono break-all">https://thinfi.com/0m9em</code></span>
+      </li>
+      <li class="flex items-start gap-2.5">
+        <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+        <span>วางรหัสผ่าน <strong class="text-white font-semibold font-mono">KILLCRITIC</strong> ในช่องกรอกรหัสผ่านบนหน้าเว็บปลายทาง</span>
+      </li>
+    </ol>
+
+    <!-- Password box with copy action -->
+    <section aria-label="รหัสผ่าน" class="mb-4 rounded-xl bg-slate-800/60 border border-slate-700/80 p-4">
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <label for="passwordOutput" class="text-xs font-semibold text-slate-400 uppercase tracking-wide">
+          รหัสผ่านสำหรับใช้งาน
+        </label>
+        <span id="copyBadge" class="text-xs font-medium text-emerald-400 opacity-0 transition-opacity duration-200">
+          คัดลอกแล้ว!
+        </span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+        <input
+          id="passwordOutput"
+          type="text"
+          readonly
+          value="KILLCRITIC"
+          aria-label="รหัสผ่าน KILLCRITIC"
+          class="w-full sm:flex-1 rounded-xl bg-slate-950 border border-slate-700 px-3.5 py-3 font-mono text-base sm:text-lg font-bold tracking-wider text-amber-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        <button
+          id="copyPasswordBtn"
+          type="button"
+          class="p-3 sm:px-4 sm:py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] text-white font-semibold text-sm transition flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg shadow-indigo-600/20"
+        >
+          <svg id="copyIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copyBtnText">คัดลอกรหัสผ่าน</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Target link display & open button -->
+    <section aria-label="ลิงก์ปลายทาง" class="mb-5 rounded-xl bg-slate-800/60 border border-slate-700/80 p-4">
+      <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+        ลิงก์ปลายทาง
+      </div>
+      <div class="flex items-center justify-between gap-2 rounded-xl bg-slate-950 border border-slate-800 px-3.5 py-2.5 mb-3">
+        <span id="targetUrlDisplay" class="font-mono text-sm text-sky-300 break-all">
+          https://thinfi.com/0m9em
+        </span>
+      </div>
+
+      <!-- Real anchor link with JS click enhancement and fallback -->
+      <a
+        id="openLinkBtn"
+        href="https://thinfi.com/0m9em"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full p-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20"
+      >
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        <span>เปิดลิงก์ https://thinfi.com/0m9em</span>
+      </a>
+    </section>
+
+    <!-- Live status / feedback banner -->
+    <div
+      id="feedbackBox"
+      role="status"
+      aria-live="polite"
+      class="min-h-[44px] rounded-xl bg-slate-950/90 border border-slate-800 px-4 py-2.5 text-xs sm:text-sm text-slate-300 flex items-center gap-2.5"
     >
-      เปิดลิงก์ https://thinfi.com/0m9em
-    </a>
-
-    <div id="statusMsg" class="status" role="status" aria-live="polite"></div>
+      <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500 shrink-0"></span>
+      <span id="statusMessage">พร้อมคัดลอกรหัสผ่าน KILLCRITIC และเปิดลิงก์</span>
+    </div>
   </main>
 
   <script>
-    const PASSWORD_VALUE = "KILLCRITIC";
-    const TARGET_URL = "https://thinfi.com/0m9em";
+    (function () {
+      const PASSWORD = "KILLCRITIC";
+      const TARGET_URL = "https://thinfi.com/0m9em";
 
-    const copyBtn = document.getElementById("copyBtn");
-    const statusMsg = document.getElementById("statusMsg");
-    const openLinkBtn = document.getElementById("openLinkBtn");
+      const passwordInput = document.getElementById("passwordOutput");
+      const copyBtn = document.getElementById("copyPasswordBtn");
+      const copyBtnText = document.getElementById("copyBtnText");
+      const copyBadge = document.getElementById("copyBadge");
+      const targetUrlDisplay = document.getElementById("targetUrlDisplay");
+      const openLinkBtn = document.getElementById("openLinkBtn");
+      const statusDot = document.getElementById("statusDot");
+      const statusMessage = document.getElementById("statusMessage");
 
-    openLinkBtn.href = TARGET_URL;
+      let resetTimer = null;
 
-    copyBtn.addEventListener("click", async () => {
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(PASSWORD_VALUE);
+      // Initialize values cleanly
+      passwordInput.value = PASSWORD;
+      targetUrlDisplay.textContent = TARGET_URL;
+      openLinkBtn.href = TARGET_URL;
+
+      /**
+       * Updates the status banner with visual indicator state.
+       * @param {string} message
+       * @param {"info" | "success" | "warn"} tone
+       */
+      function setStatus(message, tone = "info") {
+        statusMessage.textContent = message;
+        statusDot.className = "w-2.5 h-2.5 rounded-full shrink-0";
+
+        if (tone === "success") {
+          statusDot.classList.add("bg-emerald-400");
+          statusMessage.className = "text-emerald-300 font-medium";
+        } else if (tone === "warn") {
+          statusDot.classList.add("bg-amber-400");
+          statusMessage.className = "text-amber-300 font-medium";
         } else {
-          const tempInput = document.createElement("input");
-          tempInput.value = PASSWORD_VALUE;
-          document.body.appendChild(tempInput);
-          tempInput.select();
-          document.execCommand("copy");
-          document.body.removeChild(tempInput);
+          statusDot.classList.add("bg-sky-400");
+          statusMessage.className = "text-slate-300";
         }
-        statusMsg.textContent = `คัดลอกรหัสผ่าน "${PASSWORD_VALUE}" แล้ว`;
-      } catch (err) {
-        statusMsg.textContent = `รหัสผ่านคือ: ${PASSWORD_VALUE}`;
       }
-    });
+
+      /**
+       * Copies PASSWORD to clipboard using Clipboard API with execCommand fallback.
+       * @returns {Promise<boolean>}
+       */
+      async function copyPasswordToClipboard() {
+        passwordInput.focus();
+        passwordInput.select();
+        passwordInput.setSelectionRange(0, PASSWORD.length);
+
+        // Try modern Clipboard API first
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          try {
+            await navigator.clipboard.writeText(PASSWORD);
+            return true;
+          } catch (_) {
+            // Fall through to execCommand fallback
+          }
+        }
+
+        // Fallback for restricted or non-HTTPS/iframe contexts
+        try {
+          const fallbackArea = document.createElement("textarea");
+          fallbackArea.value = PASSWORD;
+          fallbackArea.setAttribute("readonly", "");
+          fallbackArea.style.position = "fixed";
+          fallbackArea.style.top = "-9999px";
+          fallbackArea.style.left = "-9999px";
+          document.body.appendChild(fallbackArea);
+          fallbackArea.focus();
+          fallbackArea.select();
+          fallbackArea.setSelectionRange(0, PASSWORD.length);
+
+          const copied = document.execCommand("copy");
+          document.body.removeChild(fallbackArea);
+          return Boolean(copied);
+        } catch (_) {
+          return false;
+        }
+      }
+
+      /**
+       * Shows visual confirmation on the copy button and badge.
+       * @param {boolean} succeeded
+       */
+      function showCopyFeedback(succeeded) {
+        if (resetTimer) {
+          clearTimeout(resetTimer);
+        }
+
+        if (succeeded) {
+          copyBtnText.textContent = "คัดลอกแล้ว";
+          copyBtn.classList.remove("bg-indigo-600", "hover:bg-indigo-500");
+          copyBtn.classList.add("bg-emerald-600", "hover:bg-emerald-500");
+          copyBadge.classList.remove("opacity-0");
+          copyBadge.classList.add("opacity-100");
+          setStatus(`คัดลอกรหัสผ่าน "${PASSWORD}" เรียบร้อยแล้ว สามารถนำไปวางได้เลย`, "success");
+        } else {
+          copyBtnText.textContent = "เลือกไว้แล้ว";
+          setStatus(`เบราว์เซอร์บล็อกการคัดลอกอัตโนมัติ — กด Ctrl+C หรือ Cmd+C เพื่อคัดลอก "${PASSWORD}"`, "warn");
+        }
+
+        resetTimer = setTimeout(() => {
+          copyBtnText.textContent = "คัดลอกรหัสผ่าน";
+          copyBtn.classList.remove("bg-emerald-600", "hover:bg-emerald-500");
+          copyBtn.classList.add("bg-indigo-600", "hover:bg-indigo-500");
+          copyBadge.classList.remove("opacity-100");
+          copyBadge.classList.add("opacity-0");
+        }, 2500);
+      }
+
+      copyBtn.addEventListener("click", async () => {
+        const ok = await copyPasswordToClipboard();
+        showCopyFeedback(ok);
+      });
+
+      // Clicking the password field itself also selects it easily
+      passwordInput.addEventListener("click", () => {
+        passwordInput.select();
+        passwordInput.setSelectionRange(0, PASSWORD.length);
+      });
+
+      // Handle link click with new-tab attempt and reliable fallback
+      openLinkBtn.addEventListener("click", (event) => {
+        try {
+          // Allow native anchor navigation while also attempting window.open if needed
+          const newWin = window.open(TARGET_URL, "_blank", "noopener,noreferrer");
+          if (newWin) {
+            event.preventDefault();
+            newWin.focus();
+            setStatus(`เปิดลิงก์ ${TARGET_URL} ในแท็บใหม่แล้ว — รหัสผ่าน: ${PASSWORD}`, "success");
+          } else {
+            // If popup was blocked, allow normal anchor navigation or navigate in current tab if prevented
+            setStatus(`กำลังเปิด ${TARGET_URL} — รหัสผ่าน: ${PASSWORD}`, "info");
+          }
+        } catch (_) {
+          // Direct navigation fallback
+          event.preventDefault();
+          window.location.assign(TARGET_URL);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
